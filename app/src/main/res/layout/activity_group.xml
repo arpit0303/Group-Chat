@@ -10,7 +10,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
+        android:id="@+id/message_send_button"
         android:src="@drawable/ic_send"
         android:background="@null"
         android:scaleType="fitXY"
@@ -22,15 +22,25 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:text="jhvjhvhj"
+        android:id="@+id/send_message_text"
+        android:hint="Enter The Text"
         android:textSize="20sp"
         android:padding="8dp"
-        android:layout_toLeftOf="@+id/imageButton"
+        android:maxLines="1"
+        android:layout_toLeftOf="@+id/message_send_button"
         android:background="@android:color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/messages_list"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/send_message_text"
+        android:layout_below="@+id/app_bar" />
 
 
 </RelativeLayout>

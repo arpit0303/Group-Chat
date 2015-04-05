@@ -1,18 +1,37 @@
 package ui;
 
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.List;
+
+import a.a.groupchat.ParseConstants;
 import a.a.groupchat.R;
 
 
 public class GroupActivity extends ActionBarActivity {
 
     Toolbar toolbar;
+    EditText sendMessage;
+    ImageButton sendButton;
+    String group;
+    String groupObjectId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +45,74 @@ public class GroupActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        String group = intent.getStringExtra("groupName");
+        group = intent.getStringExtra("groupName");
         getSupportActionBar().setTitle(group);
+
+        groupObjectId = intent.getStringExtra("groupObjectId");
+
+        sendMessage = (EditText) findViewById(R.id.send_message_text);
+        sendButton = (ImageButton) findViewById(R.id.message_send_button);
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String message = sendMessage.getText().toString().trim();
+
+                if (!(message.isEmpty())) {
+                    ParseObject mNewGroup = new ParseObject(group + "_" + groupObjectId);
+                    mNewGroup.put(ParseConstants.KEY_SENDER_OBJECT_ID, ParseUser.getCurrentUser().getObjectId());
+                    mNewGroup.put(ParseConstants.KEY_SENDER_NAME, ParseUser.getCurrentUser().getUsername());
+                    mNewGroup.put(ParseConstants.KEY_MESSAGE, message);
+
+                    mNewGroup.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if(e == null){
+                                Log.i("GroupActivity","message send");
+                                sendMessage.setText("");
+                            }
+                            else{
+                                //error
+                                AlertDialog.Builder builder = new AlertDialog.Builder(GroupActivity.this);
+                                builder.setTitle(getString(R.string.error_title))
+                                        .setMessage(getString(R.string.error_message))
+                                        .setPositiveButton(android.R.string.ok, null);
+
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(group + "_" + groupObjectId);
+
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                if(e == null){
+
+                }
+                else {
+                    //error
+                    AlertDialog.Builder builder = new AlertDialog.Builder(GroupActivity.this);
+                    builder.setTitle(getString(R.string.error_title))
+                            .setMessage(getString(R.string.error_message))
+                            .setPositiveButton(android.R.string.ok, null);
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

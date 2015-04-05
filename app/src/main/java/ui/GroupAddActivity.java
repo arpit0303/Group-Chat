@@ -62,7 +62,7 @@ public class GroupAddActivity extends ActionBarActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mGroupName = groupName.getText().toString().trim();
+                final String mGroupName = groupName.getText().toString().trim();
                 String mGroupDesc = groupDesc.getText().toString().trim();
 
                 if (mGroupName.isEmpty() || mGroupDesc.isEmpty()) {
@@ -74,7 +74,7 @@ public class GroupAddActivity extends ActionBarActivity {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
-                    ParseObject newGroup = new ParseObject(ParseConstants.KEY_NEW_GROUP);
+                    final ParseObject newGroup = new ParseObject(ParseConstants.KEY_NEW_GROUP);
                     newGroup.put(ParseConstants.KEY_NEW_GROUP_NAME, mGroupName);
                     newGroup.put(ParseConstants.KEY_NEW_GROUP_DESCRIPTION, mGroupDesc);
                     newGroup.put(ParseConstants.KEY_NEW_GROUP_MEMBERS, groupMemberList);
@@ -84,6 +84,7 @@ public class GroupAddActivity extends ActionBarActivity {
                         public void done(ParseException e) {
                             if (e == null) {
                                 //Success
+
                                 Log.i("New Group", "successful data entered.");
                                 Toast.makeText(GroupAddActivity.this, "New Group Created", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(GroupAddActivity.this, HomeActivity.class);
@@ -94,8 +95,8 @@ public class GroupAddActivity extends ActionBarActivity {
                             } else {
                                 //error
                                 AlertDialog.Builder builder = new AlertDialog.Builder(GroupAddActivity.this);
-                                builder.setTitle(getString(R.string.error_login_done_title))
-                                        .setMessage(getString(R.string.error_login_done_message))
+                                builder.setTitle(getString(R.string.error_title))
+                                        .setMessage(getString(R.string.error_message))
                                         .setPositiveButton(android.R.string.ok, null);
 
                                 AlertDialog dialog = builder.create();
@@ -149,8 +150,8 @@ public class GroupAddActivity extends ActionBarActivity {
                 } else {
                     //error
                     AlertDialog.Builder builder = new AlertDialog.Builder(GroupAddActivity.this);
-                    builder.setTitle(getString(R.string.error_login_done_title))
-                            .setMessage(getString(R.string.error_login_done_message))
+                    builder.setTitle(getString(R.string.error_title))
+                            .setMessage(getString(R.string.error_message))
                             .setPositiveButton(android.R.string.ok, null);
 
                     AlertDialog dialog = builder.create();

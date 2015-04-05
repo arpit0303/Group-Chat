@@ -61,12 +61,13 @@ public class HomeActivity extends ActionBarActivity {
             if (query.count() > 0) {
 
                 query.orderByDescending(ParseConstants.KEY_NEW_GROUP_CREATED_AT);
+                query.whereEqualTo(ParseConstants.KEY_NEW_GROUP_MEMBERS, ParseUser.getCurrentUser().getObjectId());
 
                 setSupportProgressBarIndeterminateVisibility(true);
 
                 query.findInBackground(new FindCallback<ParseObject>() {
                     @Override
-                    public void done(List<ParseObject> parseObjects, ParseException e) {
+                    public void done(final List<ParseObject> parseObjects, ParseException e) {
 
                         if (swipeRefreshLayout.isRefreshing()) {
                             swipeRefreshLayout.setRefreshing(false);
@@ -90,7 +91,7 @@ public class HomeActivity extends ActionBarActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     Intent intent = new Intent(HomeActivity.this, GroupActivity.class);
-                                    intent.putExtra("position", position);
+                                    intent.putExtra("groupObjectId", parseObjects.get(position).getObjectId());
                                     intent.putExtra("groupName", groupName.get(position));
                                     startActivity(intent);
                                 }
@@ -99,8 +100,8 @@ public class HomeActivity extends ActionBarActivity {
                         } else {
                             //error
                             AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-                            builder.setTitle(getString(R.string.error_login_done_title))
-                                    .setMessage(getString(R.string.error_login_done_message))
+                            builder.setTitle(getString(R.string.error_title))
+                                    .setMessage(getString(R.string.error_message))
                                     .setPositiveButton(android.R.string.ok, null);
 
                             AlertDialog dialog = builder.create();

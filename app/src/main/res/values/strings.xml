@@ -19,6 +19,10 @@
     <string name="error_empty_field_message">There are some fields are empty.</string>
     <string name="error_login_done_title">We\'re Sorry!!</string>
     <string name="error_login_done_message">There is some error to connect. Please Try Again.</string>
+
+    <string name="error_title">We\'re Sorry!!</string>
+    <string name="error_message">There is some error to connect. Please Try Again.</string>
+
     <string name="menu_item_logout">LogOut</string>
     <string name="menu_item_new_group">New Group</string>
     <string name="title_activity_group_add">ADD GROUP</string>
