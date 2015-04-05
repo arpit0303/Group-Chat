@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ui.HomeActivity">
+
+    <item
+        android:id="@+id/action_new_group"
+        android:title="@string/menu_item_new_group"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_group_add"
+        />
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/menu_item_logout" />
+</menu>
