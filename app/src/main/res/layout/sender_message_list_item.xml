@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/senderName"
@@ -20,7 +20,6 @@
             android:background="@android:color/holo_orange_light"
             android:maxWidth="330dp"
             android:padding="4dp"
-            android:text="New Text "
             android:textColor="@color/primaryColor"
             android:textSize="20sp" />
 
@@ -35,7 +34,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxWidth="200dp"
-                android:text="New Text kjbkjb knkjn kjnkn kjnk knk "
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="20sp" />
 
@@ -48,7 +46,6 @@
                 android:maxWidth="130dp"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
-                android:text="10 hours ago hbh bh "
                 android:textColor="@android:color/tertiary_text_light"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -60,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:paddingRight="5dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/mySendingDate"
@@ -73,7 +70,7 @@
             android:maxWidth="130dp"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:text="10 hours ago hbh bh "
+            android:paddingTop="4dp"
             android:textColor="@android:color/tertiary_text_light"
             android:textSize="15sp" />
 
@@ -84,7 +81,6 @@
             android:layout_toLeftOf="@+id/mySendingDate"
             android:background="@android:color/holo_orange_light"
             android:maxWidth="200dp"
-            android:text="New Text kjbkjb knkjn kjnkn kjnk knk "
             android:textColor="@android:color/secondary_text_light"
             android:textSize="20sp" />
     </RelativeLayout>

@@ -78,6 +78,7 @@ public class GroupActivity extends ActionBarActivity {
                             if (e == null) {
                                 Log.i("GroupActivity", "message send");
                                 sendMessage.setText("");
+                                getMessages();
                             } else {
                                 //error
                                 AlertDialog.Builder builder = new AlertDialog.Builder(GroupActivity.this);
@@ -99,6 +100,10 @@ public class GroupActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
+        getMessages();
+    }
+
+    private void getMessages() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(group + "_" + groupObjectId);
 
         query.findInBackground(new FindCallback<ParseObject>() {

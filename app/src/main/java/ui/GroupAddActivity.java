@@ -65,7 +65,7 @@ public class GroupAddActivity extends ActionBarActivity {
                 final String mGroupName = groupName.getText().toString().trim();
                 String mGroupDesc = groupDesc.getText().toString().trim();
 
-                if (mGroupName.isEmpty() || mGroupDesc.isEmpty()) {
+                if (mGroupName.isEmpty() || mGroupDesc.isEmpty() || groupMemberList.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(GroupAddActivity.this);
                     builder.setTitle(getString(R.string.error_empty_field_title))
                             .setMessage(getString(R.string.error_empty_field_message))
