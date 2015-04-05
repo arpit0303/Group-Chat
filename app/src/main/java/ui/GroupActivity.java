@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -19,10 +20,12 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import a.a.groupchat.ParseConstants;
 import a.a.groupchat.R;
+import adapter.MessageAdapter;
 
 
 public class GroupActivity extends ActionBarActivity {
@@ -30,8 +33,12 @@ public class GroupActivity extends ActionBarActivity {
     Toolbar toolbar;
     EditText sendMessage;
     ImageButton sendButton;
+    ListView groupList;
     String group;
     String groupObjectId;
+    List<ParseObject> mSenders;
+    List<String> mSenderName;
+    List<String> mMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,7 @@ public class GroupActivity extends ActionBarActivity {
 
         groupObjectId = intent.getStringExtra("groupObjectId");
 
+        groupList = (ListView) findViewById(R.id.messages_list);
         sendMessage = (EditText) findViewById(R.id.send_message_text);
         sendButton = (ImageButton) findViewById(R.id.message_send_button);
 
@@ -67,11 +75,10 @@ public class GroupActivity extends ActionBarActivity {
                     mNewGroup.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
-                            if(e == null){
-                                Log.i("GroupActivity","message send");
+                            if (e == null) {
+                                Log.i("GroupActivity", "message send");
                                 sendMessage.setText("");
-                            }
-                            else{
+                            } else {
                                 //error
                                 AlertDialog.Builder builder = new AlertDialog.Builder(GroupActivity.this);
                                 builder.setTitle(getString(R.string.error_title))
@@ -97,10 +104,20 @@ public class GroupActivity extends ActionBarActivity {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
-                if(e == null){
+                if (e == null) {
+                    mSenders = parseObjects;
 
-                }
-                else {
+                    mSenderName = new ArrayList<String>();
+                    mMessage = new ArrayList<String>();
+                    for (ParseObject sender : parseObjects) {
+                        mSenderName.add(sender.getString(ParseConstants.KEY_SENDER_NAME));
+                        mMessage.add(sender.getString(ParseConstants.KEY_MESSAGE));
+                    }
+
+                    MessageAdapter adapter = new MessageAdapter(GroupActivity.this, mSenderName, mMessage, mSenders);
+                    groupList.setAdapter(adapter);
+
+                } else {
                     //error
                     AlertDialog.Builder builder = new AlertDialog.Builder(GroupActivity.this);
                     builder.setTitle(getString(R.string.error_title))

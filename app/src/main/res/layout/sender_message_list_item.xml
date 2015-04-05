@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp">
+
+    <LinearLayout
+        android:id="@+id/senderLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/senderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:maxWidth="330dp"
+            android:padding="4dp"
+            android:text="New Text "
+            android:textColor="@color/primaryColor"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:paddingLeft="4dp">
+
+            <TextView
+                android:id="@+id/senderMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="200dp"
+                android:text="New Text kjbkjb knkjn kjnkn kjnk knk "
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/sendingDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_toRightOf="@+id/senderMessage"
+                android:maxWidth="130dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="10 hours ago hbh bh "
+                android:textColor="@android:color/tertiary_text_light"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/myLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingRight="5dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/mySendingDate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/myMessage"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/holo_orange_light"
+            android:gravity="bottom"
+            android:maxWidth="130dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="10 hours ago hbh bh "
+            android:textColor="@android:color/tertiary_text_light"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/myMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/mySendingDate"
+            android:background="@android:color/holo_orange_light"
+            android:maxWidth="200dp"
+            android:text="New Text kjbkjb knkjn kjnkn kjnk knk "
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="20sp" />
+    </RelativeLayout>
+</LinearLayout>
