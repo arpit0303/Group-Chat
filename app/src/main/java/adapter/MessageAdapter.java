@@ -74,15 +74,15 @@ public class MessageAdapter extends ArrayAdapter<String> {
             //message send by me
             holder.myLayout.setVisibility(View.VISIBLE);
             holder.senderLayout.setVisibility(View.GONE);
-            holder.myMessage.setText(mMessage.get(position));
+            holder.myMessage.setText(mSenders.get(position).getString(ParseConstants.KEY_MESSAGE));
             holder.mySendingDate.setText(convertedDate);
         }
         else {
             //send by others
             holder.myLayout.setVisibility(View.GONE);
             holder.senderLayout.setVisibility(View.VISIBLE);
-            holder.senderName.setText(mSenderName.get(position));
-            holder.message.setText(mMessage.get(position));
+            holder.senderName.setText(mSenders.get(position).getString(ParseConstants.KEY_SENDER_NAME));
+            holder.message.setText(mSenders.get(position).getString(ParseConstants.KEY_MESSAGE));
             holder.sendingDate.setText(convertedDate);
         }
 
@@ -101,4 +101,10 @@ public class MessageAdapter extends ArrayAdapter<String> {
         LinearLayout senderLayout;
         RelativeLayout myLayout;
     }
+
+//    public void refill(List<ParseObject> senders){
+//        mSenders.clear();
+//        mSenders.addAll(senders);
+//        notifyDataSetChanged();
+//    }
 }

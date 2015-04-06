@@ -120,8 +120,15 @@ public class GroupActivity extends ActionBarActivity {
                         mMessage.add(sender.getString(ParseConstants.KEY_MESSAGE));
                     }
 
-                    MessageAdapter adapter = new MessageAdapter(GroupActivity.this, mSenderName, mMessage, mSenders);
-                    groupList.setAdapter(adapter);
+                    //if(groupList.getAdapter() == null){
+                        MessageAdapter adapter = new MessageAdapter(GroupActivity.this, mSenderName, mMessage, mSenders);
+                        groupList.setAdapter(adapter);
+//                    }
+//                    else {
+//                        //refill the Adapter!
+//                        ((MessageAdapter) groupList.getAdapter()).refill(mSenders);
+//                    }
+
 
                 } else {
                     //error
