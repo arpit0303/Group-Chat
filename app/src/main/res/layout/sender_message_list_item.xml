@@ -81,6 +81,7 @@
             android:layout_toLeftOf="@+id/mySendingDate"
             android:background="@android:color/holo_orange_light"
             android:maxWidth="200dp"
+            android:paddingLeft="4dp"
             android:textColor="@android:color/secondary_text_light"
             android:textSize="20sp" />
     </RelativeLayout>

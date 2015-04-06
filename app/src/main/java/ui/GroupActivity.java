@@ -79,6 +79,7 @@ public class GroupActivity extends ActionBarActivity {
                                 Log.i("GroupActivity", "message send");
                                 sendMessage.setText("");
                                 getMessages();
+
                             } else {
                                 //error
                                 AlertDialog.Builder builder = new AlertDialog.Builder(GroupActivity.this);
@@ -151,9 +152,11 @@ public class GroupActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_refresh) {
+            getMessages();
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

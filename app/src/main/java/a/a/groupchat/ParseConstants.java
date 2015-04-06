@@ -11,6 +11,7 @@ public class ParseConstants {
     public static final String KEY_NEW_GROUP_DESCRIPTION = "GroupDescription";
     public static final String KEY_NEW_GROUP_MEMBERS = "GroupMembers";
     public static final String KEY_NEW_GROUP_CREATED_AT = "createdAt";
+    public static final String KEY_NEW_GROUP_OBJECT_ID = "objectId";
 
     //New GroupName Class
     public static final String KEY_SENDER_OBJECT_ID = "sender_object_id";
@@ -20,5 +21,5 @@ public class ParseConstants {
     //user - Parse class
     public static final String KEY_USER_NAME = "username";
 
-    public static final String KEY_FRIENDS_RELATION = "friendsRelation";
+    public static final String KEY_USER_ID = "userId";
 }

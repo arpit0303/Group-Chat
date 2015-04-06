@@ -3,6 +3,7 @@ package a.a.groupchat;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseInstallation;
 
 /**
  * Created by Arpit on 30/03/15.
@@ -16,5 +17,8 @@ public class GroupChat extends Application {
         Parse.enableLocalDatastore(this);
 
         Parse.initialize(this, "5FBtYPiZESQHN6BkXFBJfHkUXFQwFVeqw7QYPcQR", "2NXSbvuBchfUpPfPOmbrxwzxnzSiy5qFpC0J65Jz");
+
+        // Save the current Installation to Parse.
+        ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 }
