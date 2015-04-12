@@ -57,11 +57,12 @@ public class GroupAddActivity extends ActionBarActivity {
         groupName = (EditText) findViewById(R.id.new_group_name);
         groupDesc = (EditText) findViewById(R.id.new_group_description);
         mGroupMemberListView = (ListView) findViewById(R.id.group_member_listView);
-        Button submit = (Button) findViewById(R.id.group_submit_button);
+        final Button submit = (Button) findViewById(R.id.group_submit_button);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                submit.setEnabled(false);
                 final String mGroupName = groupName.getText().toString().trim();
                 String mGroupDesc = groupDesc.getText().toString().trim();
 
@@ -73,6 +74,7 @@ public class GroupAddActivity extends ActionBarActivity {
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
+                    submit.setEnabled(true);
                 } else {
                     final ParseObject newGroup = new ParseObject(ParseConstants.KEY_NEW_GROUP);
                     newGroup.put(ParseConstants.KEY_NEW_GROUP_NAME, mGroupName);
@@ -82,9 +84,9 @@ public class GroupAddActivity extends ActionBarActivity {
                     newGroup.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
+                            submit.setEnabled(true);
                             if (e == null) {
                                 //Success
-
                                 Log.i("New Group", "successful data entered.");
                                 Toast.makeText(GroupAddActivity.this, "New Group Created", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(GroupAddActivity.this, HomeActivity.class);

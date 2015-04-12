@@ -64,6 +64,7 @@ public class GroupActivity extends ActionBarActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendButton.setEnabled(false);
                 final String message = sendMessage.getText().toString().trim();
 
                 if (!(message.isEmpty())) {
@@ -75,6 +76,7 @@ public class GroupActivity extends ActionBarActivity {
                     mNewGroup.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
+                            sendButton.setEnabled(true);
                             if (e == null) {
                                 Log.i("GroupActivity", "message send");
                                 sendMessage.setText("");
@@ -93,6 +95,10 @@ public class GroupActivity extends ActionBarActivity {
                         }
                     });
                 }
+                else{
+                    sendButton.setEnabled(true);
+                }
+
             }
         });
     }
