@@ -79,6 +79,7 @@ public class GroupAddActivity extends ActionBarActivity {
                     final ParseObject newGroup = new ParseObject(ParseConstants.KEY_NEW_GROUP);
                     newGroup.put(ParseConstants.KEY_NEW_GROUP_NAME, mGroupName);
                     newGroup.put(ParseConstants.KEY_NEW_GROUP_DESCRIPTION, mGroupDesc);
+                    groupMemberList.add(ParseUser.getCurrentUser().getObjectId());
                     newGroup.put(ParseConstants.KEY_NEW_GROUP_MEMBERS, groupMemberList);
 
                     newGroup.saveInBackground(new SaveCallback() {
@@ -134,6 +135,7 @@ public class GroupAddActivity extends ActionBarActivity {
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.orderByDescending(ParseConstants.KEY_USER_NAME);
+        query.whereNotEqualTo(ParseConstants.KEY_NEW_GROUP_OBJECT_ID, ParseUser.getCurrentUser().getObjectId());
 
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override

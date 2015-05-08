@@ -3,6 +3,7 @@ package ui;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class GroupActivity extends ActionBarActivity {
     List<ParseObject> mSenders;
     List<String> mSenderName;
     List<String> mMessage;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +83,6 @@ public class GroupActivity extends ActionBarActivity {
                                 Log.i("GroupActivity", "message send");
                                 sendMessage.setText("");
                                 getMessages();
-
                             } else {
                                 //error
                                 AlertDialog.Builder builder = new AlertDialog.Builder(GroupActivity.this);
@@ -94,13 +95,28 @@ public class GroupActivity extends ActionBarActivity {
                             }
                         }
                     });
-                }
-                else{
+                } else {
                     sendButton.setEnabled(true);
                 }
 
             }
         });
+
+        // Run the runnable object defined every 100ms
+        handler.postDelayed(runnable, 100);
+    }
+
+    // Defines a runnable which is run every 100ms
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            refreshMessages();
+            handler.postDelayed(this, 100);
+        }
+    };
+
+    private void refreshMessages() {
+        getMessages();
     }
 
     @Override
@@ -126,14 +142,8 @@ public class GroupActivity extends ActionBarActivity {
                         mMessage.add(sender.getString(ParseConstants.KEY_MESSAGE));
                     }
 
-                    //if(groupList.getAdapter() == null){
-                        MessageAdapter adapter = new MessageAdapter(GroupActivity.this, mSenderName, mMessage, mSenders);
-                        groupList.setAdapter(adapter);
-//                    }
-//                    else {
-//                        //refill the Adapter!
-//                        ((MessageAdapter) groupList.getAdapter()).refill(mSenders);
-//                    }
+                    MessageAdapter adapter = new MessageAdapter(GroupActivity.this, mSenderName, mMessage, mSenders);
+                    groupList.setAdapter(adapter);
 
 
                 } else {
